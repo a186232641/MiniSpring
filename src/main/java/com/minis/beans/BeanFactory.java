@@ -7,5 +7,9 @@ package com.minis.beans;
  */
 public interface BeanFactory {
    Object getBean(String name) throws BeansException, ClassNotFoundException;
-   void  registerBeanDefintion(BeanDefinition beanDefinition);
+   void  registerBean(String name,Object object);
+   Boolean containsBean(String  name);
+   boolean isSingleton(String name);
+   boolean isPrototype(String name);
+   Class<?> getType(String name);
 }
