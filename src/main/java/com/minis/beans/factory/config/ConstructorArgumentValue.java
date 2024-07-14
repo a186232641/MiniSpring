@@ -10,17 +10,17 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
-public class ConstruvtorArgumentValue {
+public class ConstructorArgumentValue {
    private String type;
    private Object value;
    private String name;
 
-   public ConstruvtorArgumentValue(Object value, String name) {
+   public ConstructorArgumentValue(Object value, String name) {
       this.value = value;
       this.name = name;
    }
 
-   public ConstruvtorArgumentValue(String type, Object value, String name) {
+   public ConstructorArgumentValue(String type, Object value, String name) {
       this.type = type;
       this.value = value;
       this.name = name;

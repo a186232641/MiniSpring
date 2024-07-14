@@ -1,7 +1,10 @@
 package com.minis.beans.factory.xml;
 
 import com.minis.beans.*;
+import com.minis.beans.factory.config.AutowiredCapableBeanFactory;
 import com.minis.beans.factory.config.BeanDefinition;
+import com.minis.beans.factory.config.ConstructorArgumentValues;
+import com.minis.beans.factory.config.ConstructorArgumentValue;
 import com.minis.core.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Element;
@@ -16,9 +19,9 @@ import java.util.List;
  */
 @Slf4j
 public class XmlBeanDefinitionReader {
-    SimpleBeanFactory beanFactory;
+    AutowiredCapableBeanFactory beanFactory;
 
-    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
+    public XmlBeanDefinitionReader(AutowiredCapableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
@@ -61,15 +64,15 @@ public class XmlBeanDefinitionReader {
             beanDefinition.setDependsOn(array);
             //获取构造器注入
             List<Element> constructorElements = element.elements("constructor-arg");
-            ArgumentValues AVS = new ArgumentValues();
+            ConstructorArgumentValues AVS = new ConstructorArgumentValues();
             for (Element e : constructorElements) {
                 String ptype=e.attributeValue("type");
                 String pName = e.attributeValue("name");
                 String pValue = e.attributeValue("value");
-                AVS.addArgumentValue(new ArgumentValue(ptype,pValue,pName));
+                AVS.addConstructorArgumentValue(new ConstructorArgumentValue(ptype,pValue,pName));
             }
             log.info("读取的bean 构造器为 {} ",AVS);
-            beanDefinition.setArgumentValues(AVS);
+            beanDefinition.setConstructorArgumentValues(AVS);
 
             log.info("注册bean Id:{}  beanDefiniton",beanId,beanDefinition);
             this.beanFactory.registerBeanDefintion(beanId,beanDefinition);

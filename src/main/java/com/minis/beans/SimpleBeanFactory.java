@@ -2,6 +2,8 @@ package com.minis.beans;
 
 import com.minis.beans.factory.BeanFactory;
 import com.minis.beans.factory.config.BeanDefinition;
+import com.minis.beans.factory.config.ConstructorArgumentValue;
+import com.minis.beans.factory.config.ConstructorArgumentValues;
 import com.minis.beans.factory.support.DefaultSingletonBeanRegistry;
 import lombok.extern.slf4j.Slf4j;
 
@@ -192,13 +194,13 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
         Constructor<?> con = null;
         try {
             clz = Class.forName(bd.getClassName());
-            ArgumentValues argumentValues = bd.getArgumentValues();
-            Class<?>[] paramTypes = new Class<?>[argumentValues.getArgumentCount()];
-            Object[] paramValues = new Object[argumentValues.getArgumentCount()];
-            if (!argumentValues.isEmpty()) {
-                for (int i = 0; i < argumentValues.getArgumentCount(); i++) {
-                    ArgumentValue argumentValue =
-                            argumentValues.getIndexedArgumentValues(i);
+            ConstructorArgumentValues constructorArgumentValues = bd.getConstructorArgumentValues();
+            Class<?>[] paramTypes = new Class<?>[constructorArgumentValues.getArgumentCount()];
+            Object[] paramValues = new Object[constructorArgumentValues.getArgumentCount()];
+            if (!constructorArgumentValues.isEmpty()) {
+                for (int i = 0; i < constructorArgumentValues.getArgumentCount(); i++) {
+                    ConstructorArgumentValue argumentValue =
+                            constructorArgumentValues.getIndexedArgumentValues(i);
                     if ("String"
                             .equals(argumentValue.getType()) ||
                             "java.lang.String"

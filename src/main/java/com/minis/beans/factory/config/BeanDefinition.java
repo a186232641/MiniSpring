@@ -21,7 +21,7 @@ public class BeanDefinition {
    String SCOPE_PROTOTYPE = "prototype";
    private boolean lazyInit = true;
    private String[] dependsOn;
-   private ArgumentValues argumentValues;
+   private ConstructorArgumentValues constructorArgumentValues;
    private PropertyValues propertyValues;
    private String initMethodName;
    private  volatile  Object beanClass;
