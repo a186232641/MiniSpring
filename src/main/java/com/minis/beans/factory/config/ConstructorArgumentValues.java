@@ -1,19 +1,20 @@
-package com.minis.beans;
+package com.minis.beans.factory.config;
 
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import com.minis.beans.ArgumentValue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 韩飞龙
  * @version 1.0
  * 2024/7/11
  */
-public class ArgumentValues {
+public class ConstructorArgumentValues {
 
     private final List<ArgumentValue> argumentValueList = new ArrayList<>();
 
-    public ArgumentValues() {
+    public ConstructorArgumentValues() {
     }
 
     public void addArgumentValue(ArgumentValue  argumentValue){

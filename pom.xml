@@ -25,6 +25,18 @@
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version> <!-- 版本号根据你的需求选择 -->
+        </dependency>
+
+        <!-- Logback 日志实现 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version> <!-- 版本号根据你的需求选择 -->
+        </dependency>
     </dependencies>
 
 </project>

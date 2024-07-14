@@ -1,4 +1,4 @@
-package com.minis.beans;
+package com.minis.core;
 
 import java.util.Iterator;
 import java.util.Objects;

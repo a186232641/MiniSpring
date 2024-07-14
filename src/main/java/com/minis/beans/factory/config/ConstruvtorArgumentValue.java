@@ -1,4 +1,4 @@
-package com.minis.beans;
+package com.minis.beans.factory.config;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,17 +10,17 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
-public class ArgumentValue {
+public class ConstruvtorArgumentValue {
    private String type;
    private Object value;
    private String name;
 
-   public ArgumentValue(Object value, String name) {
+   public ConstruvtorArgumentValue(Object value, String name) {
       this.value = value;
       this.name = name;
    }
 
-   public ArgumentValue(String type, Object value, String name) {
+   public ConstruvtorArgumentValue(String type, Object value, String name) {
       this.type = type;
       this.value = value;
       this.name = name;

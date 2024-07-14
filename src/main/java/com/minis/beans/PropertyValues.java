@@ -23,9 +23,9 @@ public class PropertyValues {
     public void addPropertyValue(PropertyValue py){
         this.propertyVasluesList.add(py);
     }
-    public void addPropertyValue(String propertyName,Object propertyValue){
-        this.propertyVasluesList.add(new PropertyValue(propertyName,propertyValue));
-    }
+//    public void addPropertyValue(String propertyName,Object propertyValue){
+//        this.propertyVasluesList.add(new PropertyValue(propertyName,propertyValue,null,null));
+//    }
     public void removePropertyValue(PropertyValue propertyValue){
         this.propertyVasluesList.remove(propertyValue);
     }
