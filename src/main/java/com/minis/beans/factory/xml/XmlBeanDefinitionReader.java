@@ -1,7 +1,7 @@
 package com.minis.beans.factory.xml;
 
 import com.minis.beans.*;
-import com.minis.beans.factory.config.AutowiredCapableBeanFactory;
+import com.minis.beans.factory.support.AbstractAutowiredCapableBeanFactory;
 import com.minis.beans.factory.config.BeanDefinition;
 import com.minis.beans.factory.config.ConstructorArgumentValues;
 import com.minis.beans.factory.config.ConstructorArgumentValue;
@@ -19,9 +19,9 @@ import java.util.List;
  */
 @Slf4j
 public class XmlBeanDefinitionReader {
-    AutowiredCapableBeanFactory beanFactory;
+    AbstractAutowiredCapableBeanFactory beanFactory;
 
-    public XmlBeanDefinitionReader(AutowiredCapableBeanFactory beanFactory) {
+    public XmlBeanDefinitionReader(AbstractAutowiredCapableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 

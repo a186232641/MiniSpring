@@ -1,6 +1,5 @@
-package com.minis.context;
+package com.minis.event;
 
-import com.apple.eawt.ApplicationEvent;
 
 /**
  * @author 韩飞龙
@@ -9,4 +8,5 @@ import com.apple.eawt.ApplicationEvent;
  */
 public interface ApplicationEventPublisher {
    void publishEvent(ApplicationEvent event);
+   void addApplicationListener(ApplicationListener applicationListener);
 }

@@ -1,7 +1,10 @@
 package com.minis.beans.factory.config;
 
-import com.minis.beans.BeansException;
+import com.minis.beans.BeanException;
+import com.minis.beans.factory.BeanFactory;
 import com.minis.beans.factory.annotation.Autowired;
+import com.minis.beans.factory.support.AbstractAutowiredCapableBeanFactory;
+import com.minis.beans.factory.support.BeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -13,9 +16,14 @@ import java.lang.reflect.Field;
  */
 @Slf4j
 public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor {
-    private AutowiredCapableBeanFactory beanFactory;
+    private BeanFactory beanFactory;
+
+    public AutowiredAnnotationBeanPostProcessor(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
+
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeanException, ClassNotFoundException {
         Object result = bean;
         Class<?> aClass = bean.getClass();
         Field[] fields = aClass.getDeclaredFields();
@@ -39,15 +47,15 @@ public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeanException {
         return bean;
     }
 
-    public AutowiredCapableBeanFactory getBeanFactory() {
+    public BeanFactory getBeanFactory() {
         return beanFactory;
     }
 
-    public void setBeanFactory(AutowiredCapableBeanFactory beanFactory) {
+    public void setBeanFactory(AbstractAutowiredCapableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 }

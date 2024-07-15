@@ -6,12 +6,12 @@ package com.minis.beans;
  * 2024/7/10
  */
 
-public class BeansException extends Exception{
-   public BeansException(String message) {
+public class BeanException extends Exception{
+   public BeanException(String message) {
       super(message);
    }
 
-   public BeansException() {
+   public BeanException() {
 
    }
 }

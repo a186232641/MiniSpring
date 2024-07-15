@@ -9,5 +9,5 @@ public interface SingletonBeanRegistry {
    void registerSingleton(String name,Object obj);
    Object getSingleton(String beanName);
    boolean containsSingleton(String beanName );
-   String[] getSingletonName();
+   String[] getSingletonNames();
 }

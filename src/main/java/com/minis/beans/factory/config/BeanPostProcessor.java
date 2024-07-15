@@ -1,6 +1,6 @@
 package com.minis.beans.factory.config;
 
-import com.minis.beans.BeansException;
+import com.minis.beans.BeanException;
 
 /**
  * @author 韩飞龙
@@ -8,7 +8,7 @@ import com.minis.beans.BeansException;
  * 2024/7/14
  */
 public interface BeanPostProcessor {
-   Object postProcessBeforeInitialization(Object bean,String beanName) throws BeansException;
-   Object postProcessAfterInitialization(Object bean,String beanName)throws BeansException;
+   Object postProcessBeforeInitialization(Object bean,String beanName) throws BeanException, ClassNotFoundException;
+   Object postProcessAfterInitialization(Object bean,String beanName)throws BeanException;
 
 }

@@ -35,7 +35,7 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
         for (String name : beanDefintionsNames) {
             try {
                 getBean(name);
-            } catch (BeansException e) {
+            } catch (BeanException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -128,7 +128,7 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
     }
 
     @Override
-    public Object getBean(String name) throws BeansException {
+    public Object getBean(String name) throws BeanException {
         Object singleton = this.getSingleton(name);
         if (singleton == null) {
            singleton = this.earlySingletonObjects.get(name);
@@ -243,7 +243,7 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
             log.info("获取bean name：{}",name);
             try {
                 getBean(name);
-            } catch (BeansException e) {
+            } catch (BeanException e) {
                 throw new RuntimeException(e);
             }
 

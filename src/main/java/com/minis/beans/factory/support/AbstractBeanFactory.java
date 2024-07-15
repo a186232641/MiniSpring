@@ -1,11 +1,9 @@
 package com.minis.beans.factory.support;
 
 import com.minis.beans.*;
-import com.minis.beans.factory.BeanFactory;
 import com.minis.beans.factory.config.BeanDefinition;
 import com.minis.beans.factory.config.ConstructorArgumentValue;
 import com.minis.beans.factory.config.ConstructorArgumentValues;
-import com.minis.beans.factory.support.DefaultSingletonBeanRegistry;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
@@ -22,15 +20,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * 2024/7/14
  */
 @Slf4j
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefintionRegistry {
-    private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory, BeanDefintionRegistry {
+    public Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
     private List<String> beanDefintionsNames = new ArrayList<>();
     private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 
     public AbstractBeanFactory() {
     }
 
-    public void refresh() throws BeansException {
+    public void refresh() throws BeanException {
         for (String beanName : beanDefintionsNames) {
             try {
                 getBean(beanName);
@@ -40,7 +38,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         }
     }
 
-    public Object getBean(String name) throws BeansException {
+    public Object getBean(String name) throws BeanException {
         Object singleton = this.getSingleton(name);
         if (singleton == null) {
             singleton = this.earlySingletonObjects.get(name);
@@ -211,8 +209,8 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
 
     }
-    public abstract   Object applyBeanPostProcessorBeforeInitialization(Object existBean,String beanName) throws BeansException;
-    public abstract  Object applyBeanPostProcessorAfterInitialization(Object existBean,String beanName) throws BeansException;
+    public abstract   Object applyBeanPostProcessorBeforeInitialization(Object existBean,String beanName) throws BeanException;
+    public abstract  Object applyBeanPostProcessorAfterInitialization(Object existBean,String beanName) throws BeanException;
 
 
     @Override
@@ -223,7 +221,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
             log.info("获取bean name：{}", name);
             try {
                 getBean(name);
-            } catch (BeansException e) {
+            } catch (BeanException e) {
                 throw new RuntimeException(e);
             }
 
