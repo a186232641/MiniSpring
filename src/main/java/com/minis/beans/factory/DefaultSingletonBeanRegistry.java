@@ -1,4 +1,4 @@
-package com.minis.beans.factory.support;
+package com.minis.beans.factory;
 
 import com.minis.beans.factory.config.SingletonBeanRegistry;
 
@@ -36,7 +36,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
 
    @Override
-   public String[] getSingletonName() {
+   public String[] getSingletonNames() {
       return (String[]) this.beanNames.toArray();
    }
    protected void removeSingleton(String beanName){

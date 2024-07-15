@@ -9,10 +9,7 @@ import com.minis.beans.factory.support.ConfigurableListableBeanFactory;
 import com.minis.beans.factory.xml.XmlBeanDefinitionReader;
 import com.minis.core.ClassPathXmlResource;
 import com.minis.core.Resource;
-import com.minis.core.env.Environment;
 import com.minis.event.*;
-
-import java.util.List;
 
 /***
  * @description : 一个 Bean 管理器 目前是单例的

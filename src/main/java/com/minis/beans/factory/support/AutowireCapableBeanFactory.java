@@ -13,9 +13,11 @@ import com.minis.beans.factory.BeanFactory;
  * 新增自动装配BeanFactory
  */
 public interface AutowireCapableBeanFactory extends BeanFactory {
-   int AUTOWIRE_NO=0;
-   int AUTOWIRE_BY_NAME = 1;
-   int AUTOWIRE_BY_TYPE = 2;
-    Object applyBeanPostProcessorBeforeInitialization(Object existBean, String beanName) throws BeanException;
-   public Object applyBeanPostProcessorAfterInitialization(Object existBean, String beanName) throws BeanException;
+    int AUTOWIRE_NO = 0;
+    int AUTOWIRE_BY_NAME = 1;
+    int AUTOWIRE_BY_TYPE = 2;
+
+    Object applyBeanPostProcessorBeforeInitialization(Object existBean, String beanName) throws BeanException, ClassNotFoundException;
+
+    Object applyBeanPostProcessorAfterInitialization(Object existBean, String beanName) throws BeanException;
 }

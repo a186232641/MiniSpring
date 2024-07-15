@@ -4,7 +4,6 @@ import com.minis.beans.BeanException;
 import com.minis.beans.factory.BeanFactory;
 import com.minis.beans.factory.annotation.Autowired;
 import com.minis.beans.factory.support.AbstractAutowiredCapableBeanFactory;
-import com.minis.beans.factory.support.BeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;

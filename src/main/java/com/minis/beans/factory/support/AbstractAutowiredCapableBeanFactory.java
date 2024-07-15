@@ -12,16 +12,16 @@ import java.util.List;
  * @version 1.0
  * 2024/7/14
  */
-public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFactory  implements AutowireCapableBeanFactory{
+public abstract class AbstractAutowiredCapableBeanFactory extends AbstractFactory implements AutowireCapableBeanFactory{
    private final List<BeanPostProcessor> processorList = new ArrayList<>();
 
    @Override
-   public void addBeanPostProcess(BeanPostProcessor beanPostProcessor) {
+   public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
       this.processorList.add(beanPostProcessor);
    }
 
    @Override
-   public int getBeanPostProcessorsCount() {
+   public int getBeanPostProcessorCount() {
       return this.processorList.size();
    }
 
@@ -40,7 +40,7 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
    }
 
    @Override
-   public Object applyBeanPostProcessorBeforeInitialization(Object existBean, String beanName) throws BeanException {
+   public Object applyBeanPostProcessorBeforeInitialization(Object existBean, String beanName) throws BeanException, ClassNotFoundException {
       Object result = existBean;
       for (BeanPostProcessor beanPostProcessor : processorList) {
 

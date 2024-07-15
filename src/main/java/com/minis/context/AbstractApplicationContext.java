@@ -112,7 +112,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext{
     }
 
     @Override
-    public <T> Map<String, T> getBeansOfType(Class type) throws BeanException {
+    public <T> Map<String, T> getBeansOfType(Class type) throws BeanException, ClassNotFoundException {
         return getBeanFactory().getBeansOfType(type);
     }
 

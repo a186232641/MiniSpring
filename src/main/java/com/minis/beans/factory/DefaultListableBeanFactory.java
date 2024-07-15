@@ -33,8 +33,10 @@ public class DefaultListableBeanFactory extends AbstractAutowiredCapableBeanFact
         return this.beanDefinitionMap.get(beanName).getDependsOn();
     }
 
+
+
     @Override
-    public boolean containsBeanDefiniton(String beanName) {
+    public boolean containsBeanDefinition(String beanName) {
         return false;
     }
 
@@ -43,13 +45,17 @@ public class DefaultListableBeanFactory extends AbstractAutowiredCapableBeanFact
         return this.beanDefinitionMap.size();
     }
 
+
+
+
+
     @Override
-    public String[] getBeanDefinitonNames() {
+    public String[] getBeanDefinitionNames() {
         return (String[]) this.beanNames.toArray();
     }
 
     @Override
-    public String[] getBeanNaemsForType(Class<?> type) {
+    public String[] getBeanNamesForType(Class<?> type) {
         List<String> result = new ArrayList<>();
         for (String beanName : beanNames) {
             boolean matchFound = false;
@@ -66,13 +72,19 @@ public class DefaultListableBeanFactory extends AbstractAutowiredCapableBeanFact
     }
 
     @Override
-    public <T> Map<String, T> getBeanType(Class type) throws BeanException {
-        String[] beanNames = getBeanNaemsForType(type);
+    public <T> Map<String, T> getBeansOfType(Class type) throws BeanException, ClassNotFoundException {
+        String[] beanNames = getBeanNamesForType(type);
         Map<String,T> result = new LinkedHashMap<>(beanNames.length);
         for (String beanName : beanNames) {
             Object bean = getBean(beanName);
             result.put(beanName,(T)bean);
         }
         return result;
+    }
+
+
+    @Override
+    public void registerBeanDefinition(BeanDefinition beanDefinition) {
+
     }
 }

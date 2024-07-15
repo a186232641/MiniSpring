@@ -1,6 +1,7 @@
 package com.minis.beans.factory.support;
 
 import com.minis.beans.*;
+import com.minis.beans.factory.DefaultSingletonBeanRegistry;
 import com.minis.beans.factory.config.BeanDefinition;
 import com.minis.beans.factory.config.ConstructorArgumentValue;
 import com.minis.beans.factory.config.ConstructorArgumentValues;
@@ -20,12 +21,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * 2024/7/14
  */
 @Slf4j
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory, BeanDefintionRegistry {
+public abstract class AbstractFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory, BeanDefintionRegistry {
     public Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
     private List<String> beanDefintionsNames = new ArrayList<>();
     private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 
-    public AbstractBeanFactory() {
+    public AbstractFactory() {
     }
 
     public void refresh() throws BeanException {
@@ -38,7 +39,13 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         }
     }
 
-    public Object getBean(String name) throws BeanException {
+    @Override
+    public void registerBeanDefinition(BeanDefinition beanDefinition) {
+        beanDefinitionMap.put(beanDefinition.getId(),beanDefinition);
+        beanNames.add(beanDefinition.getId());
+    }
+
+    public Object getBean(String name) throws BeanException, ClassNotFoundException {
         Object singleton = this.getSingleton(name);
         if (singleton == null) {
             singleton = this.earlySingletonObjects.get(name);
@@ -209,7 +216,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
 
     }
-    public abstract   Object applyBeanPostProcessorBeforeInitialization(Object existBean,String beanName) throws BeanException;
+    public abstract   Object applyBeanPostProcessorBeforeInitialization(Object existBean,String beanName) throws BeanException, ClassNotFoundException;
     public abstract  Object applyBeanPostProcessorAfterInitialization(Object existBean,String beanName) throws BeanException;
 
 
@@ -221,7 +228,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
             log.info("获取bean name：{}", name);
             try {
                 getBean(name);
-            } catch (BeanException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
@@ -246,7 +253,6 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     }
 
 
-    @Override
     public void registerBean(String name, Object object) {
         this.singletons.put(name, object);
     }
